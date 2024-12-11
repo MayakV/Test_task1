@@ -1,0 +1,33 @@
+version: "3.7"
+
+services:
+  # db container could be used to hold data or log errors
+  # Didn't implement it here as it wasn't required
+#  db:
+#    image: mongo:latest
+#    ports:
+#      - "27017:27017"
+#    volumes:
+#      - mongodb:/data/db
+  server:
+    build:
+      context: ./
+      dockerfile: server/Dockerfile
+    ports:
+      - "5000:5000"
+#    depends_on:
+#      - db
+    environment:
+      - GOOGLE_APPLICATION_CREDENTIALS=/tmp/keys/service_secret.json
+#      - DB_NAME=test_api1
+#      - HOSTNAME=db
+#      - PORT=27017
+
+# Could also store db_name and other sensitive data in .env file, didn't feel the need here
+
+# to run container indefinitely
+#    command: bash -c "while true; do echo hello; sleep 2; done"
+
+volumes:
+  logs:
+  mongodb:
